@@ -26,6 +26,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:authorities="package com.example.project"
+            android:name=".UsersProvider"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            ></provider>
+
     </application>
 
 </manifest>

@@ -94,7 +94,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/passwordWrapper">
+                android:id="@+id/passwordWrapper"
+                app:counterEnabled="true"
+                app:counterMaxLength="9"
+                app:passwordToggleEnabled="true">
+
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -109,7 +113,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/confPasswordWrapper">
+                android:id="@+id/confPasswordWrapper"
+                app:counterEnabled="true"
+                app:counterMaxLength="9"
+                app:passwordToggleEnabled="true">
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -124,7 +131,9 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/contactWrapper">
+            android:id="@+id/contactWrapper"
+            app:counterEnabled="true"
+            app:counterMaxLength="10">
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
