@@ -30,6 +30,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
+
         firstname= findViewById(R.id.userFirstName)
         lastname= findViewById(R.id.userLastName)
         email= findViewById(R.id.userEmailAddress)
@@ -120,6 +121,7 @@ class RegisterActivity : AppCompatActivity() {
             //add the next intent
 
         }
+
 
 
     }
