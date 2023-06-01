@@ -1,6 +1,8 @@
 package com.example.project
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,7 +17,13 @@ private lateinit var loginBtn : Button
 
 private lateinit var emailWrapper: TextInputLayout
 private lateinit var passwordWrapper: TextInputLayout
+
+private lateinit var db: SQLiteDatabase
+
 class LoginActivity : AppCompatActivity() {
+
+    private lateinit var helper: MyHelper
+
     @SuppressLint("MissingInflatedId", "Range")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,13 +36,7 @@ class LoginActivity : AppCompatActivity() {
         emailWrapper= findViewById(R.id.userEmailWrapper)
         passwordWrapper= findViewById(R.id.userPasswordWrapper)
 
-        val cols = listOf<String>(UsersProvider.email,UsersProvider.password).toTypedArray()
 
-        var rs= contentResolver.query(UsersProvider.CONTENT_URI,
-            cols,
-            null,
-            null,
-            cols[0])
 
         loginBtn.setOnClickListener {
             val emailStr : String = email.text.toString().trim()
@@ -53,6 +55,17 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            val cols = listOf<String>(UsersProvider.email,UsersProvider.password).toTypedArray()
+
+            var rs= contentResolver.query(UsersProvider.CONTENT_URI,
+                cols,
+                "${cols[0]} LIKE ?",
+
+                Array(1) {"%$emailStr%"},
+                cols[0])
+
+
+
             when(rs?.count){
                 //if an error happened while the running
                 null -> {Toast.makeText(this,"Error while running the query",Toast.LENGTH_SHORT).show()}
@@ -62,10 +75,12 @@ class LoginActivity : AppCompatActivity() {
                     if(rs != null){
                         if(rs?.moveToFirst() == true){
                             do{
-                                val email : String = rs.getString(rs.getColumnIndex(UsersProvider.email))
-                                val password : String = rs.getString(rs.getColumnIndex(UsersProvider.password))
-                                if(email == emailStr && password == passwordStr){
+                                val email1 : String = rs.getString(0)//rs.getString(rs.getColumnIndex(UsersProvider.email))
+                                val password1 : String = rs.getString(1)
+                                if(email1 == emailStr && password1 == passwordStr){
                                     //go to the next intent
+                                    val intent = Intent(this@LoginActivity, ShopActivity::class.java)
+                                    startActivity(intent)
                                     Toast.makeText(this,"Welcome "+UsersProvider.name,Toast.LENGTH_SHORT).show()
                                 }
 
@@ -76,7 +91,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
             }
-
+//
         }
     }
 }

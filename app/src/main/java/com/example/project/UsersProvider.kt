@@ -11,7 +11,7 @@ class UsersProvider() : ContentProvider(){
 
     companion object {
 
-        val PROVIDER_NAME = "com.example.project.UsersProvider"
+        val PROVIDER_NAME = "package com.example.project/UsersProvider"
 
         val URL = "content://$PROVIDER_NAME/USERS"
         val CONTENT_URI = Uri.parse(URL)

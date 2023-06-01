@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.*
-import com.example.project.databinding.ActivityMainBinding
 import com.google.android.material.textfield.TextInputLayout
 import java.util.regex.Pattern
 
